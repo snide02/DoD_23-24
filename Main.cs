@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoD_23_24.Source.Gameplay.World.Nobleman;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,7 +8,8 @@ public class Main : Game
 {
     private GraphicsDeviceManager _graphics;
 
-    World world;
+    //World world;
+    baseMusicGame world;
 
     public Main()
     {
@@ -32,7 +34,8 @@ public class Main : Game
         Globals.graphics = this.GraphicsDevice;
         Globals.window = this.Window;
 
-        world = new World();
+        //world = new World();
+        world = new baseMusicGame();
     }
 
     protected override void Update(GameTime gameTime)
