@@ -14,12 +14,11 @@ namespace DoD_23_24.Source.Gameplay.World.Nobleman
         int bpm = 2;
         Level musicGame;
         Player player;
+        Obstacle ball; 
 
-        //Moving Object Function
+        //Constructor               - DONE
 
         //Door Function
-
-        //Object Path Function
 
         //Start Song Function
             //Start Timer
@@ -31,26 +30,37 @@ namespace DoD_23_24.Source.Gameplay.World.Nobleman
         //Update Function           - DONE
 
         //Draw Function (Square)    - DONE
-
-        //Room Creation Function
-            //Draw in the room
+            //Room Creation Function
 
         public baseMusicGame()
         {
             musicGame = new Level("Content/map.tmx", "Tiny Adventure Pack\\");
             player = new Player("2D/Sprites/Item", new Vector2(100, 100), new Vector2(16, 16), true, musicGame);
+            ball = new Obstacle("2D/Sprites/Item", new Vector2(100, 100), new Vector2(16, 16), true, musicGame);
+        }
+
+        public void Door()
+        {
+
+        }
+
+        public void Health()
+        {
+
         }
 
 
-        public virtual void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             player.Update(gameTime);
+            ball.Update(gameTime);
         }
 
-        public virtual void Draw()
+        public void Draw()
         {
             musicGame.Draw();
             player.Draw();
+            ball.Draw();
         }
 
         public Player GetPlayer()
