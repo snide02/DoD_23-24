@@ -1,4 +1,4 @@
-﻿#region Includes
+#region Includes
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,83 +15,79 @@ using Microsoft.Xna.Framework.Media;
 #endregion
 namespace DoD_23_24
 {
-	public class Player : Basic2D
+	public class Player : Entity
 	{
         float speed = 50f;
-        Matrix translation;
-        public Rectangle playerBounds;
-        private float zoom = 2.0f;
-        private Level level;
+        TransformComponent transform;
+        bool isPressed = false;
+        bool isFrozen = false;
 
-        public Player(string PATH, Vector2 POS, Vector2 DIMS, bool shouldScale, Level level) : base(PATH, POS, DIMS, shouldScale)
+        public Player(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
 		{
-            playerBounds = new Rectangle((int)pos.X - (int)(dims.X/2), (int)pos.Y - (int)(dims.Y / 2), (int)dims.X, (int)dims.Y);
-            this.level = level;
+            transform = (TransformComponent)AddComponent(new TransformComponent(this, POS, ROT, DIMS));
+            AddComponent(new RenderComponent(this, PATH));
+            AddComponent(new CollisionComponent(this, true, true));
         }
 
         public override void Update(GameTime gameTime)
         {
-            Movement(gameTime);
-            CalculateTranslation();
-
             base.Update(gameTime);
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
+            Movement(gameTime);
         }
 
         public void Movement(GameTime gameTime)
         {
-            var kstate = Keyboard.GetState();
+            if(isFrozen)
+            {
+                return;
+            }
 
-            Vector2 initPos = pos;
+            KeyboardState kstate = Keyboard.GetState();
 
             if (kstate.IsKeyDown(Keys.Left))
             {
-                pos.X -= speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                transform.pos.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Right))
             {
-                pos.X += speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                transform.pos.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            playerBounds.X = (int)pos.X - (int)(dims.X / 2);
-            if (level.CheckCollision(playerBounds)) pos.X = initPos.X;
 
             if (kstate.IsKeyDown(Keys.Up))
             {
-                pos.Y -= speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                transform.pos.Y -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Down))
             {
-                pos.Y += speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            playerBounds.Y = (int)pos.Y - (int)(dims.Y / 2);
-            if (level.CheckCollision(playerBounds)) pos.Y = initPos.Y;
         }
 
-        private void CalculateTranslation()
+        public override void OnCollision(Entity otherEntity)
         {
-            var dx = (Globals.WIDTH / (zoom*2)) - playerBounds.X;
-            var dy = (Globals.HEIGHT / (zoom*2)) - playerBounds.Y;
-            translation = Matrix.CreateTranslation(dx, dy, 0f) * Matrix.CreateScale(zoom);
+            Console.WriteLine("I'm Colliding!");
+
+            if(otherEntity.name == "OverlapZone")
+            {
+                InteractWithNPC(otherEntity);
+            }
         }
 
-        public Vector2 getPos() {
-            return pos;
-        }
-
-        public void setPos(Vector2 pos)
+        public void InteractWithNPC(Entity overlapZone)
         {
-            this.pos = pos;
-        }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isPressed)
+            {
+                overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().Speak();
+                isFrozen = overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().CheckIfPlayerFrozen();
+                isPressed = true;
+            }
 
-        public Matrix GetTranslation()
-        {
-            return translation;
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                isPressed = false;
+            }
         }
     }
 }

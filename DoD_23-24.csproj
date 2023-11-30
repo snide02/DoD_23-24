@@ -18,27 +18,13 @@
     <None Remove="Content\2D\" />
     <None Remove="Content\Audio\" />
     <None Remove="Content\Fonts\" />
-    <None Remove="Content\LevelTiles\" />
-    <None Remove="Content\LevelTiles\[A]Dirt_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]Dirt_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[A]Flower_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]Flower_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[A]Grass_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]Grass_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[A]Wall-Up_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]Wall-Up_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[A]Water_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]Water_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[A]WaterFall_pipo.png" />
-    <None Remove="Content\LevelTiles\[A]WaterFall_pipo.tsx" />
-    <None Remove="Content\LevelTiles\[Base]BaseChip_pipo.png" />
-    <None Remove="Content\LevelTiles\[Base]BaseChip_pipo.tsx" />
-    <None Remove="Content\LevelTiles\LightShadow_pipo.png" />
-    <None Remove="Content\LevelTiles\LightShadow_pipo.tsx" />
-    <None Remove="Content\LevelTiles\samplemap.tmx" />
     <None Remove="Content\2D\Sprites\Special1.png" />
     <None Remove="Content\2D\Sprites\Item.png" />
     <None Remove="Content\2D\Sprites\DialogueBox.png" />
+    <None Remove="Source\Components\" />
+    <None Remove="Content\NPCText\TestNPC.txt" />
+    <None Remove="Content\bin\DesktopGL\Content\NPCText\" />
+    <None Remove="Content\bin\DesktopGL\Content\NPCText\TestNPC.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -53,60 +39,9 @@
   <ItemGroup>
     <Folder Include="Content\Audio\" />
     <Folder Include="Content\Fonts\" />
-    <Folder Include="Content\LevelTiles\" />
+    <Folder Include="Content\bin\DesktopGL\Content\NPCText\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\LevelTiles\[A]Dirt_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Dirt_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Flower_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Flower_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Grass_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Grass_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Wall-Up_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Wall-Up_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Water_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]Water_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]WaterFall_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[A]WaterFall_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[Base]BaseChip_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\[Base]BaseChip_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\LightShadow_pipo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\LightShadow_pipo.tsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\LevelTiles\samplemap.tmx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\2D\Sprites\Special1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -120,6 +55,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiny Adventure Pack\env.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\NPCText\TestNPC.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bin\DesktopGL\Content\NPCText\TestNPC.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

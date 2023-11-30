@@ -1,4 +1,4 @@
-#region Includes
+﻿#region Includes
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +12,19 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Reflection.Emit;
 #endregion
-
 namespace DoD_23_24
 {
-    class Globals
+    abstract public class Component
     {
-        public static ContentManager content;
-        public static GraphicsDevice graphics;
-        public static SpriteBatch spriteBatch;
-        public static GameWindow window;
-        public static int WIDTH = 960, HEIGHT = 600;
-        public static CollisionSystem collisionSystem;
-        public static bool isDebugOn = true;
+        protected readonly Entity entity;
+
+        protected Component(Entity entity)
+        {
+            this.entity = entity;
+        }
+        public virtual void Update(GameTime gameTime) { }
+        public virtual void Draw() { }
     }
 }
