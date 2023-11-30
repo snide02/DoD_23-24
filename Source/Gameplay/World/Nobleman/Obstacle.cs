@@ -15,69 +15,58 @@ using Microsoft.Xna.Framework.Media;
 #endregion
 namespace DoD_23_24
 {
-    public class Obstacle : Basic2D
+
+    public class Obstacle : Entity
     {
         float speed = 50f;
-        Matrix translation;
-        public Rectangle objectBounds;
-        private float zoom = 2.0f;
-        private Level level;
+        TransformComponent transform;
+        bool isPressed = false;
+        bool isFrozen = false;
 
-        public Obstacle(string PATH, Vector2 POS, Vector2 DIMS, bool shouldScale, Level level) : base(PATH, POS, DIMS, shouldScale)
+        public Obstacle(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
         {
-            objectBounds = new Rectangle((int)pos.X - (int)(dims.X / 2), (int)pos.Y - (int)(dims.Y / 2), (int)dims.X, (int)dims.Y);
-            this.level = level;
+            transform = (TransformComponent)AddComponent(new TransformComponent(this, POS, ROT, DIMS));
+            AddComponent(new RenderComponent(this, PATH));
+            AddComponent(new CollisionComponent(this, true, true));
         }
 
         public override void Update(GameTime gameTime)
         {
-            Movement(gameTime);
-            CalculateTranslation();
-
             base.Update(gameTime);
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
+            Movement(gameTime);
         }
 
         public void Movement(GameTime gameTime)
         {
-
-            Vector2 initPos = pos;
-
-            pos.X += speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            pos.Y += speed * zoom * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            objectBounds.X = (int)pos.X - (int)(dims.X / 2);
-            if (level.CheckCollision(objectBounds)) pos.X = -pos.X;
-
-           
-            objectBounds.Y = (int)pos.Y - (int)(dims.Y / 2);
-            if (level.CheckCollision(objectBounds)) pos.Y = -pos.Y;
+            if (isFrozen)
+            {
+                return;
+            }
         }
 
-        private void CalculateTranslation()
+        public override void OnCollision(Entity otherEntity)
         {
-            var dx = (Globals.WIDTH / (zoom * 2)) - objectBounds.X;
-            var dy = (Globals.HEIGHT / (zoom * 2)) - objectBounds.Y;
-            translation = Matrix.CreateTranslation(dx, dy, 0f) * Matrix.CreateScale(zoom);
+            Console.WriteLine("I'm Colliding!");
+
+            if (otherEntity.name == "OverlapZone")
+            {
+                InteractWithNPC(otherEntity);
+            }
         }
 
-        public Vector2 getPos()
+        public void InteractWithNPC(Entity overlapZone)
         {
-            return pos;
-        }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isPressed)
+            {
+                overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().Speak();
+                isFrozen = overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().CheckIfPlayerFrozen();
+                isPressed = true;
+            }
 
-        public void setPos(Vector2 pos)
-        {
-            this.pos = pos;
-        }
-
-        public Matrix GetTranslation()
-        {
-            return translation;
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                isPressed = false;
+            }
         }
     }
 }
