@@ -37,9 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Audio\" />
-    <Folder Include="Content\bin\DesktopGL\Content\NPCText\" />
     <Folder Include="Content\Fonts\" />
-    <Folder Include="Content\bin\DesktopGL\Content\NPCText\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\2D\Sprites\Special1.png">
@@ -58,9 +56,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NPCText\TestNPC.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\bin\DesktopGL\Content\NPCText\TestNPC.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

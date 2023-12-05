@@ -40,6 +40,7 @@ namespace DoD_23_24.Source.Gameplay.World.Nobleman
             Globals.collisionSystem = new CollisionSystem();
 
             Entity playerInstance = new Player("Player", "2D/Sprites/Item", new Vector2(100, 100), 0.0f, new Vector2(16, 16));
+            Entity ball = new Obstacle("Player", "2D/Sprites/Item", new Vector2(50, 50), 0.0f, new Vector2(16, 16));
             Entity randomThing = new Entity("RandomThing", Layer.NPC);
             randomThing.AddComponent(new TransformComponent(randomThing,
                 new Vector2(-50, -50), 0.0f, new Vector2(16, 16)));
@@ -54,6 +55,7 @@ namespace DoD_23_24.Source.Gameplay.World.Nobleman
             TileMapGenerator tileMapGenerator = new TileMapGenerator("Content/map.tmx", "Tiny Adventure Pack\\");
             entities.AddRange(tileMapGenerator.GetTiles());
             entities.Add(playerInstance);
+            entities.Add(ball);
             entities.Add(randomThing);
             entities.Add(camera);
             entities.Add(book);

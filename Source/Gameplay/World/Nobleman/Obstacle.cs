@@ -20,8 +20,6 @@ namespace DoD_23_24
     {
         float speed = 50f;
         TransformComponent transform;
-        bool isPressed = false;
-        bool isFrozen = false;
 
         public Obstacle(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
         {
@@ -38,10 +36,9 @@ namespace DoD_23_24
 
         public void Movement(GameTime gameTime)
         {
-            if (isFrozen)
-            {
-                return;
-            }
+            transform.pos.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
         }
 
         public override void OnCollision(Entity otherEntity)
@@ -50,23 +47,13 @@ namespace DoD_23_24
 
             if (otherEntity.name == "OverlapZone")
             {
-                InteractWithNPC(otherEntity);
+                InteractWithPlayer(otherEntity);
             }
         }
 
-        public void InteractWithNPC(Entity overlapZone)
+        public void InteractWithPlayer(Entity overlapZone)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !isPressed)
-            {
-                overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().Speak();
-                isFrozen = overlapZone.GetComponent<OverlapZoneComponent>().GetParentNPC().CheckIfPlayerFrozen();
-                isPressed = true;
-            }
-
-            if (Keyboard.GetState().IsKeyUp(Keys.Space))
-            {
-                isPressed = false;
-            }
+           
         }
     }
 }
