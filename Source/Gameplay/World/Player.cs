@@ -17,6 +17,7 @@ namespace DoD_23_24
 {
 	public class Player : Entity
 	{
+        int health = 3;
         float speed = 50f;
         TransformComponent transform;
         bool isPressed = false;
@@ -73,6 +74,11 @@ namespace DoD_23_24
             {
                 InteractWithNPC(otherEntity);
             }
+
+            if(otherEntity.name == "Ball")
+            {
+                takeHealth(otherEntity);
+            }
         }
 
         public void InteractWithNPC(Entity overlapZone)
@@ -88,6 +94,13 @@ namespace DoD_23_24
             {
                 isPressed = false;
             }
+        }
+
+        public void takeHealth(Entity obstacle)
+        {
+            health = health - 1;
+            if (health == 0)
+                speed = 0;
         }
     }
 }

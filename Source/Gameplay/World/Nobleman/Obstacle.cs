@@ -18,7 +18,8 @@ namespace DoD_23_24
 
     public class Obstacle : Entity
     {
-        float speed = 50f;
+        float speed = 30f;
+        int health = 3;
         TransformComponent transform;
 
         public Obstacle(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
@@ -36,26 +37,22 @@ namespace DoD_23_24
 
         public void Movement(GameTime gameTime)
         {
-            transform.pos.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            transform.pos.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
         }
 
         public override void OnCollision(Entity otherEntity)
         {
             Console.WriteLine("I'm Colliding!");
 
-            speed = speed * -1;
-
-            if (otherEntity.name == "OverlapZone")
+            if (otherEntity.name != "Player")
             {
-                InteractWithPlayer(otherEntity);
+                speed = speed * -1;
             }
-        }
-
-        public void InteractWithPlayer(Entity overlapZone)
-        {
+            else
+            {
            
+            }
         }
     }
 }
