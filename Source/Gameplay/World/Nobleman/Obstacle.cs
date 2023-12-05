@@ -37,13 +37,15 @@ namespace DoD_23_24
         public void Movement(GameTime gameTime)
         {
             transform.pos.X += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         }
 
         public override void OnCollision(Entity otherEntity)
         {
             Console.WriteLine("I'm Colliding!");
+
+            speed = speed * -1;
 
             if (otherEntity.name == "OverlapZone")
             {
