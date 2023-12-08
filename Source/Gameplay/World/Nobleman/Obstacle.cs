@@ -18,7 +18,8 @@ namespace DoD_23_24
 
     public class Obstacle : Entity
     {
-        float speed = 30f;
+        float speedX = 50f;
+        float speedY = 50f;
         int health = 3;
         TransformComponent transform;
 
@@ -37,8 +38,8 @@ namespace DoD_23_24
 
         public void Movement(GameTime gameTime)
         {
-            transform.pos.X -= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //transform.pos.Y += speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            transform.pos.X += speedX * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            transform.pos.Y -= speedY * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public override void OnCollision(Entity otherEntity)
@@ -47,7 +48,15 @@ namespace DoD_23_24
 
             if (otherEntity.name != "Player")
             {
-                speed = speed * -1;
+                if (transform.pos.X <= 0 || transform.pos.X + transform.dims.X >= 100)
+                {
+                    speedX = speedX * -1; 
+                }
+                if (transform.pos.Y <= 0 || transform.pos.Y + transform.dims.Y >= 100)
+                {
+                    speedY = speedY * -1;
+                }
+
             }
             else
             {
