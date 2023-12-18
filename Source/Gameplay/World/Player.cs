@@ -19,19 +19,29 @@ namespace DoD_23_24
 	{
         int health = 3;
         float speed = 50f;
-        TransformComponent transform;
-        bool isPressed = false;
-        bool isFrozen = false;
+        Matrix translation;
+        public Rectangle playerBounds;
+        private float zoom = 2.0f;
+        private Level level;
+        public List<GameItem> inventory {  get; set; }
 
         public Player(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
 		{
-            transform = (TransformComponent)AddComponent(new TransformComponent(this, POS, ROT, DIMS));
-            AddComponent(new RenderComponent(this, PATH));
-            AddComponent(new CollisionComponent(this, true, true));
+            playerBounds = new Rectangle((int)pos.X - (int)(dims.X/2), (int)pos.Y - (int)(dims.Y / 2), (int)dims.X, (int)dims.Y);
+            this.level = level;
+            this.inventory = new List<GameItem>();
         }
 
         public override void Update(GameTime gameTime)
         {
+            Movement(gameTime);
+            CalculateTranslation();
+
+            foreach (GameItem item in inventory)
+            {
+                Console.WriteLine(item.name);
+            }
+
             base.Update(gameTime);
             Movement(gameTime);
         }
