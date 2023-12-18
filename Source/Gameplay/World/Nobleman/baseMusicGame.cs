@@ -38,7 +38,7 @@ namespace DoD_23_24.Source.Gameplay.World.Nobleman
             Globals.collisionSystem = new CollisionSystem();
 
             Entity playerInstance = new Player("Player", "2D/Sprites/Item", new Vector2(100, 100), 0.0f, new Vector2(16, 16));
-            Entity ball = new Obstacle("Ball", "2D/Sprites/Special1", new Vector2(100, 200), 0.0f, new Vector2(16, 16));
+            Entity ball = new Obstacle("Ball", "2D/Sprites/Special1", new Vector2(100, 150), 0.0f, new Vector2(16, 16));
             Entity randomThing = new Entity("RandomThing", Layer.NPC);
             randomThing.AddComponent(new TransformComponent(randomThing,
                 new Vector2(-50, -50), 0.0f, new Vector2(16, 16)));

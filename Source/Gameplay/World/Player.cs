@@ -17,17 +17,19 @@ namespace DoD_23_24
 {
 	public class Player : Entity
 	{
-        int health = 3;
+        int health = 10000;
         float speed = 50f;
         TransformComponent transform;
         bool isPressed = false;
         bool isFrozen = false;
+        
 
         public Player(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
 		{
             transform = (TransformComponent)AddComponent(new TransformComponent(this, POS, ROT, DIMS));
             AddComponent(new RenderComponent(this, PATH));
             AddComponent(new CollisionComponent(this, true, true));
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -67,8 +69,9 @@ namespace DoD_23_24
         }
 
         public override void OnCollision(Entity otherEntity)
-        {
+        { 
             Console.WriteLine("I'm Colliding!");
+       
 
             if(otherEntity.name == "OverlapZone")
             {
@@ -76,8 +79,9 @@ namespace DoD_23_24
             }
 
             if(otherEntity.name == "Ball")
-            {
-                takeHealth(otherEntity);
+            {        
+                layer = Layer.Tiles;
+                takeHealth(this);
             }
         }
 

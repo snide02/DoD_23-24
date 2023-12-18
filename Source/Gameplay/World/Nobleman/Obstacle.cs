@@ -20,7 +20,8 @@ namespace DoD_23_24
     {
         float speedX = 50f;
         float speedY = 50f;
-        int health = 3;
+        
+
         TransformComponent transform;
 
         public Obstacle(string name, string PATH, Vector2 POS, float ROT, Vector2 DIMS) : base(name, Layer.Player)
@@ -39,7 +40,7 @@ namespace DoD_23_24
         public void Movement(GameTime gameTime)
         {
             transform.pos.X += speedX * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            transform.pos.Y -= speedY * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //transform.pos.Y -= speedY * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public override void OnCollision(Entity otherEntity)
@@ -60,7 +61,7 @@ namespace DoD_23_24
             }
             else
             {
-           
+                layer = Layer.Tiles;
             }
         }
     }
