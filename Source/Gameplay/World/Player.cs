@@ -29,7 +29,8 @@ namespace DoD_23_24
             transform = (TransformComponent)AddComponent(new TransformComponent(this, POS, ROT, DIMS));
             AddComponent(new RenderComponent(this, PATH));
             AddComponent(new CollisionComponent(this, true, true));
-            
+            //collision = (CollisionComponent)AddComponent(new CollisionComponent(this, true, true));
+            AddComponent(new CharacterControllerComponent(this));
         }
 
         public override void Update(GameTime gameTime)
