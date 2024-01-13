@@ -38,8 +38,6 @@
   <ItemGroup>
     <Folder Include="Content\Audio\" />
     <Folder Include="Content\Fonts\" />
-    <Folder Include="Content\bin\DesktopGL\Content\NPCText\" />
-    <Folder Include="Content\LevelTiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\2D\Sprites\Special1.png">

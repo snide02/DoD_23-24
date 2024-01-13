@@ -22,7 +22,6 @@ namespace DoD_23_24
         public bool isPhysical, isMoveable;
 
         TransformComponent transform;
-        CharacterControllerComponent characterController;
 
         public CollisionComponent(Entity entity, bool isPhysical, bool isMoveable) : base(entity)
         {
@@ -32,7 +31,6 @@ namespace DoD_23_24
             this.isMoveable = isMoveable;
 
             transform = entity.GetComponent<TransformComponent>();
-            
             bounds = new Rectangle((int)transform.pos.X, (int)transform.pos.Y, (int)transform.dims.X, (int)transform.dims.Y);
         }
 
@@ -56,7 +54,6 @@ namespace DoD_23_24
         {
             //TODO: Fix jumpiness
             CollisionComponent otherCollision = otherEntity.GetComponent<CollisionComponent>();
-            characterController = entity.GetComponent<CharacterControllerComponent>();
 
             if (isPhysical && otherCollision.isPhysical && isMoveable)
             {
@@ -65,23 +62,32 @@ namespace DoD_23_24
                 Console.WriteLine(bounds.Center + " " + otherCollision.bounds.Center);
                 Console.WriteLine(penetrationDepthVector + " " + overlap);
 
+
                 if (overlap > 0)
                 {
-                    transform.pos.X = otherCollision.bounds.Right;
-                }
-                if (penetrationDepthVector.X < 0)
-                {
-                    transform.pos.X = otherCollision.bounds.Left + transform.dims.X;
+                    if (penetrationDepthVector.X > 0)
+                    {
+                        transform.pos.X += overlap;
+                    }
+                    else
+                    {
+                        transform.pos.X -= overlap;
+                    }
                 }
 
-                if (penetrationDepthVector.Y > 0)
-                {
-                    transform.pos.Y = otherCollision.bounds.Bottom;
-                }
-                if (penetrationDepthVector.Y < 0)
-                {
-                    transform.pos.Y = otherCollision.bounds.Top;
-                }
+                //overlap = bounds.Height / 2 + otherCollision.bounds.Height / 2 - Math.Abs(penetrationDepthVector.Y);
+
+                //if (overlap > 0)
+                //{
+                //    if (penetrationDepthVector.Y > 0)
+                //    {
+                //        transform.pos.Y += overlap;
+                //    }
+                //    else
+                //    {
+                //        transform.pos.Y -= overlap;
+                //    }
+                //}
             }
 
             entity.OnCollision(otherEntity);
@@ -89,17 +95,6 @@ namespace DoD_23_24
 
         public bool CheckCollision(Rectangle otherBounds)
         {
-            if(isMoveable)
-            {
-                if (bounds.Left > otherBounds.Right || bounds.Right < otherBounds.Left
-                || bounds.Top > otherBounds.Bottom || bounds.Bottom < otherBounds.Top)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
             return bounds.Intersects(otherBounds);
         }
 
