@@ -46,10 +46,11 @@ namespace DoD_23_24
         public override void OnCollision(Entity otherEntity)
         {
             Console.WriteLine("I'm Colliding!");
+            
 
             if (otherEntity.name != "Player")
             {
-                if (transform.pos.X <= 0 || transform.pos.X + transform.dims.X >= 100)
+                if (transform.pos.X <= 0 || transform.pos.X + transform.dims.X >= 10)
                 {
                     speedX = speedX * -1; 
                 }
@@ -60,8 +61,8 @@ namespace DoD_23_24
 
             }
             else
-            {
-                layer = Layer.Tiles;
+            {              
+                layer = Layer.Tiles;               
             }
         }
     }
